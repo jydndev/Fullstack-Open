@@ -30,3 +30,8 @@ app.post('/new_note', (req, res) => {
 
   return res.redirect('/notes');
 });
+
+notes.push({
+  content: req.body.note,
+  date: new Date(),
+});

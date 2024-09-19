@@ -1,12 +1,7 @@
 ```mermaid
 sequenceDiagram
-    participant A
-    participant B
-    participant C
-    participant D
+    participant Server
+    participant Browser
 
-    A->>B: Message 1
-    A->>C: Message 2
-    B->>D: Message 3
-    C->>D: Message 4
+    Server->>Browser: Message 1
 ```

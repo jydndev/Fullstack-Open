@@ -1,33 +1,6 @@
-const Header = ({ course }) => {
-  return <h1>{course}</h1>;
-};
-
-const Content = ({
-  part1,
-  part2,
-  part3,
-  exercises1,
-  exercises2,
-  exercises3,
-}) => {
-  return (
-    <>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-    </>
-  );
-};
-
-const Total = ({ exercises1, exercises2, exercises3 }) => {
-  return <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>;
-};
+import Header from "./Header";
+import Content from "./Content"
+import Total from "./Total"
 
 const App = () => {
   const course = 'Half Stack application development';

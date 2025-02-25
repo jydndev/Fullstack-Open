@@ -44,10 +44,8 @@ const App = () => {
 
   return (
     <div>
-      {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {right}
+     <Button onClick={handleLeftClick} text='left' />
+     <Button onClick={handleRightClick} text='right' />
 
       <p>{allClicks.join(' ')}</p>
      <p>total {total}</p>

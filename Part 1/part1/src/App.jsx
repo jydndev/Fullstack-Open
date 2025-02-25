@@ -11,15 +11,17 @@ const App = () => {
 
   const handleLeftClick = () => {
     setAll(allClicks.concat('L'))
-    setLeft(left + 1)
-    setTotal(left + right)
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft+ right)
   }
 
 
   const handleRightClick = () => {
     setAll(allClicks.concat('R'))
-    setRight(right + 1)
-    setTotal(left + right)
+    const updatedRight = right + 1
+    setRight(updatedRight)
+    setTotal(left + updatedRight)
   }
 
   return (

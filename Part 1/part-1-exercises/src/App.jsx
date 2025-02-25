@@ -3,6 +3,22 @@ import { useState } from "react";
 // import Content from "./Content"
 // import Total from "./Total"
 
+
+const Statistics = ({ good, neutral, bad, all, average, positivePercentage }) => { 
+  return (
+    <div>
+      <h2>statistics</h2>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
+      <p>all {all}</p>
+      <p>average {average.toFixed(2)}</p> 
+      <p>positive {positivePercentage.toFixed(2)}%</p>
+    </div>
+  );
+};
+
+
 const App = () => {
 
   // const course = {
@@ -36,26 +52,20 @@ const App = () => {
   return (
     <div>
       <div>
-        <h2>give feedback</h2>
-        <button onClick={handleGood}>good</button>
-        <button onClick={handleNeutral}>neutral</button>
-        <button onClick={handleBad}>bad</button>
-        <div>
+            <h2>give feedback</h2>
+            <button onClick={handleGood}>good</button>
+            <button onClick={handleNeutral}>neutral</button>
+            <button onClick={handleBad}>bad</button>
+         <div>
 
-        <h2>statistics</h2>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all {all}</p>
-        <p>average {average}</p>
-        <p>positivie {positivePercentage}</p>
-        </div>
+          <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positivePercentage={positivePercentage} />
         
-      </div>
-
+          </div>
       {/* <Header course={course.name} />
       <Content parts={course.parts} />
       <Total parts={course.parts} /> */}
+    </div>
+
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import Display from "./Display";
-// import Button from "./Button";
+import Button from "./Button";
 
 const History = ({allClicks}) => {
 if (allClicks.length === 0) {
@@ -26,6 +26,13 @@ const App = () => {
   const [allClicks, setAll] = useState([])
   const [total, setTotal] = useState(0)
 
+  const [value, setValue] = useState(10)
+
+  const setToValue = (newValue) => {
+    console.log('value now', newValue)
+    setValue(newValue)
+  }
+
 
   const handleLeftClick = () => {
     setAll(allClicks.concat('L'))
@@ -44,8 +51,12 @@ const App = () => {
 
   return (
     <div>
-     <Button onClick={handleLeftClick} text='left' />
-     <Button onClick={handleRightClick} text='right' />
+    <div>
+      {value}
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
+    </div>
 
       <p>{allClicks.join(' ')}</p>
      <p>total {total}</p>

@@ -25,11 +25,38 @@ const App2 = () => {
     setVotes(newVotes);
   };
 
+  const getMostVotedAnecdote = () => {
+    let maxVote = 0;
+    let mostVotedIndex = 0;
+    let anyVotes = false;
+
+    for (let i = 0; i < votes.length; i++) {
+      if (votes[i] > maxVote) {
+        maxVote = votes[i];
+        mostVotedIndex = i;
+        anyVotes = true;
+      } else if (votes[i] > 0) {
+        anyVotes = true;
+      }
+    }
+    if (anyVotes) {
+      return anecdotes[mostVotedIndex];
+    } else {
+      return null;
+    }
+  };
+
+  const mostVoted = getMostVotedAnecdote();
+
   return (
     <>
+      <h2>Anecdote of the day</h2>
       <div>{anecdotes[selected]}</div>
       <button onClick={handleVote}>vote</button>
       <button onClick={handleRandomNum}>next anecdote</button>
+
+      <h2>Anecdote with most votes</h2>
+      {mostVoted && <p>{mostVoted}</p>}
     </>
   );
 };

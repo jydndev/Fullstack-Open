@@ -3,11 +3,13 @@ import { useState } from 'react';
 const App = () => {
   const [persons, setPersons] = useState([{ name: 'Arto Hellas' }]);
   const [newName, setNewName] = useState('');
+  const [newNum, setNewNum] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newNameObject = {
       name: newName,
+      number: newNum,
     };
 
     if (persons.some((person) => person.name === newName)) {
@@ -17,22 +19,15 @@ const App = () => {
     }
 
     setNewName('');
+    setNewNum('');
   };
-
-  // ////
-  // event.preventDefault();
-  // const noteObject = {
-  //   content: newNote,
-  //   important: Math.random() < 0.5,
-  //   id: String(notes.length + 1),
-  // };
-
-  // setNotes(notes.concat(noteObject));
-  // setNewNote('');
-  // ///
 
   const handleNewName = (e) => {
     setNewName(e.target.value);
+  };
+
+  const handleNewNum = (e) => {
+    setNewNum(e.target.value);
   };
 
   return (
@@ -44,6 +39,9 @@ const App = () => {
           name: <input value={newName} onChange={handleNewName} />
         </div>
         <div>
+          number: <input value={newNum} onChange={handleNewNum} />
+        </div>
+        <div>
           <button type="submit">add</button>
         </div>
       </form>
@@ -51,7 +49,11 @@ const App = () => {
       <h2>Numbers</h2>
       <ul>
         {persons.map((person) => {
-          return <li key={person.name}>{person.name}</li>;
+          return (
+            <li key={person.name}>
+              {person.name} {person.number}
+            </li>
+          );
         })}
       </ul>
     </div>

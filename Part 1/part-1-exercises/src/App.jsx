@@ -4,7 +4,7 @@ import { useState } from "react";
 // import Total from "./Total"
 
 
-const Statistics = ({ good, neutral, bad, all, average, positivePercentage }) => { 
+const Statistics = ({ good, neutral, bad, all, average, positivePercentage,  }) => { 
   if (all === 0) {
     return (
       <div>
@@ -25,6 +25,13 @@ const Statistics = ({ good, neutral, bad, all, average, positivePercentage }) =>
     </div>
   );
 };
+
+
+const Button = ({text, onClick}) => {
+return (
+  <button onClick={onClick}>{text}</button>
+)
+}
 
 
 const App = () => {
@@ -61,9 +68,9 @@ const App = () => {
     <div>
       <div>
             <h2>give feedback</h2>
-            <button onClick={handleGood}>good</button>
-            <button onClick={handleNeutral}>neutral</button>
-            <button onClick={handleBad}>bad</button>
+            <Button onClick={handleGood} text="good" />
+            <Button onClick={handleNeutral} text="neutral" />
+            <Button onClick={handleBad} text="bad" />
          <div>
 
           <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positivePercentage={positivePercentage} />

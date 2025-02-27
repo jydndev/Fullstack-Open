@@ -7,4 +7,9 @@ const save = (newObject) => {
   return req.then((res) => res.data);
 };
 
-export default { save };
+const deleteNum = (id) => {
+  const req = axios.delete(`${baseUrl}/${id}`);
+  return req.then((res) => res.data);
+};
+
+export default { save, deleteNum };

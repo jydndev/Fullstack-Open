@@ -51,6 +51,12 @@ const App = () => {
     person.name.includes(filter)
   );
 
+  const handleDelete = (id) => {
+    helper.deleteNum(id).then(() => {
+      setPersons(persons.filter((person) => person.id !== id));
+    });
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -65,7 +71,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons filteredPersons={filteredPersons} />
+      <Persons filteredPersons={filteredPersons} deleteNum={handleDelete} />
     </div>
   );
 };

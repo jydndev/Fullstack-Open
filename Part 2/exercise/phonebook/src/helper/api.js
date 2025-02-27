@@ -12,4 +12,9 @@ const deleteNum = (id) => {
   return req.then((res) => res.data);
 };
 
-export default { save, deleteNum };
+const updateNum = (newObject, id) => {
+  const req = axios.put(`${baseUrl}/${id}`, newObject);
+  return req.then((res) => res.data);
+};
+
+export default { save, deleteNum, updateNum };

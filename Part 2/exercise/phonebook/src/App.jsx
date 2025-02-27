@@ -51,6 +51,7 @@ const App = () => {
     person.name.includes(filter)
   );
 
+  //todo alert popup
   const handleDelete = (id) => {
     helper.deleteNum(id).then(() => {
       setPersons(persons.filter((person) => person.id !== id));

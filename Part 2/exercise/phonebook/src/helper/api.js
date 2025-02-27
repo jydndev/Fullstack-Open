@@ -16,5 +16,6 @@ const updateNum = (newObject, id) => {
   const req = axios.put(`${baseUrl}/${id}`, newObject);
   return req.then((res) => res.data);
 };
+//todo finish implementing update feature
 
 export default { save, deleteNum, updateNum };

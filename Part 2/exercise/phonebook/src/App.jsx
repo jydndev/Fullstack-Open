@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
-import axios from 'axios';
+import helper from './helper/api';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -26,7 +26,9 @@ const App = () => {
     if (persons.some((person) => person.name === newName)) {
       alert(`${newName} is already added to phonebook.`);
     } else {
-      setPersons(persons.concat(newNameObject));
+      helper.save(newNameObject).then((res) => {
+        setPersons(persons.concat(res));
+      });
     }
 
     setNewName('');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
@@ -15,6 +15,18 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newNum, setNewNum] = useState('');
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    helper
+      .fetch()
+      .then((fetchedPersons) => {
+        setPersons(fetchedPersons);
+        console.log('fetch data from server');
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

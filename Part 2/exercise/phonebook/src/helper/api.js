@@ -2,6 +2,11 @@ import axios from 'axios';
 
 const baseUrl = 'http://localhost:3001/persons';
 
+const fetch = () => {
+  const req = axios.get(baseUrl);
+  return req.then((res) => res.data);
+};
+
 const save = (newObject) => {
   const req = axios.post(baseUrl, newObject);
   return req.then((res) => res.data);
@@ -18,4 +23,4 @@ const updateNum = (newObject, id) => {
 };
 //todo finish implementing update feature
 
-export default { save, deleteNum, updateNum };
+export default { fetch, save, deleteNum, updateNum };

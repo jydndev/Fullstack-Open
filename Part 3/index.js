@@ -46,8 +46,16 @@ app.delete('/api/notes/:id', (req, res) => {
   res.status(204).end();
 });
 
-app.post('/api/notes', (req, res) => {
+app.post('/api/notes', (request, response) => {
+  const maxId =
+    notes.length > 0 ? Math.max(...notes.map((n) => Number(n.id))) : 0;
+
   const note = request.body;
+  note.id = String(maxId + 1);
+
+  notes = notes.concat(note);
+
+  response.json(note);
 });
 
 // const app = http.createServer((request, response) => {

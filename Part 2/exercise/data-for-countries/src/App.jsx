@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import helper from './helper/api';
 import Countries from './components/Countries';
+import weatherApi from './helper/weatherApi';
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [filter, setFilter] = useState('');
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [weather, setWeather] = useState(null);
 
   useEffect(() => {
     helper
@@ -21,10 +23,20 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (filteredCountries.length === 1) {
-      setSelectedCountry(filteredCountries[0]);
+    if (selectedCountry) {
+      weatherApi
+        .fetchWeatherData(selectedCountry.latlng[0], selectedCountry.latlng[1])
+        .then((weatherData) => {
+          setWeather(weatherData);
+        })
+        .catch((err) => {
+          console.error('Error fetching weather data', err);
+          setWeather(null);
+        });
+    } else {
+      setWeather(null);
     }
-  }, [filteredCountries]);
+  }, [selectedCountry]);
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
@@ -35,6 +47,7 @@ function App() {
     );
     setFilteredCountries(filtered);
     setSelectedCountry(null);
+    setWeather(null);
   };
 
   const handleShow = (country) => {
@@ -59,6 +72,13 @@ function App() {
               <li key={language}>{language}</li>
             ))}
           </ul>
+          {weather && (
+            <div>
+              <h3>Weather</h3>
+              <p>Current Temperature: {weather.current.temp}</p>
+              <p>Current Weather: {weather.current.weather[0].description}</p>
+            </div>
+          )}
         </div>
       ) : (
         <Countries

@@ -6,7 +6,6 @@ import helper from './helper/api';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-
   const [newName, setNewName] = useState('');
   const [newNum, setNewNum] = useState('');
   const [filter, setFilter] = useState('');
@@ -30,11 +29,29 @@ const App = () => {
       number: newNum,
     };
 
-    if (persons.some((person) => person.name === newName)) {
-      alert(`${newName} is already added to phonebook.`);
+    const existingPerson = persons.find((person) => person.name === newName);
+
+    if (existingPerson) {
+      if (
+        confirm(
+          `${newName} is already added to phonebook. Would you like to replace the old number with the new one?`
+        )
+      ) {
+        helper
+          .updateNum(existingPerson.id, newNameObject)
+          .then((updatedPerson) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== updatedPerson.id ? person : updatedPerson
+              )
+            );
+          });
+      } else {
+        return;
+      }
     } else {
-      helper.save(newNameObject).then((res) => {
-        setPersons(persons.concat(res));
+      helper.save(newNameObject).then((data) => {
+        setPersons(persons.concat(data));
       });
     }
 
@@ -60,9 +77,13 @@ const App = () => {
 
   //todo alert popup
   const handleDelete = (id) => {
-    helper.deleteNum(id).then(() => {
-      setPersons(persons.filter((person) => person.id !== id));
-    });
+    if (window.confirm('do you want to delete the contact?')) {
+      helper.deleteNum(id).then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      });
+    } else {
+      return;
+    }
   };
 
   return (

@@ -17,10 +17,9 @@ const deleteNum = (id) => {
   return req.then((res) => res.data);
 };
 
-const updateNum = (newObject, id) => {
+const updateNum = (id, newObject) => {
   const req = axios.put(`${baseUrl}/${id}`, newObject);
   return req.then((res) => res.data);
 };
-//todo finish implementing update feature
 
 export default { fetch, save, deleteNum, updateNum };

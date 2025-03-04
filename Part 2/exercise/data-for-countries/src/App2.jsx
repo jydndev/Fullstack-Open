@@ -14,19 +14,15 @@ const App2 = () => {
       .then((res) => setCountries(res.data));
   }, []);
 
-  const searchedCountries = countries.filter((c) => {
-    c.name.common.toLowerCase().includes(search.toLocaleLowerCase());
-  });
+  const searchedCountries = countries.filter((c) =>
+    c.name.common.toLowerCase().includes(search.toLocaleLowerCase())
+  );
 
   return (
     <>
       <div>
-        find countries
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        find countries{' '}
+        <input value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
       {search === '' ? null : (
         <CountryList countries={searchedCountries} showCountry={setSearch} />

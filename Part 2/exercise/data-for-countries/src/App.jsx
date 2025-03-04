@@ -75,8 +75,7 @@ function App() {
           {weather && (
             <div>
               <h3>Weather</h3>
-              <p>Current Temperature: {weather.current.temp}</p>
-              <p>Current Weather: {weather.current.weather[0].description}</p>
+              <p>Current Temperature: {weather.main.temp}</p>
             </div>
           )}
         </div>

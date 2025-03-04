@@ -67,8 +67,15 @@ button:focus-visible {
   }
 }
 
-.success {
-  color: green;
+.notification {
   background: lightgray;
   font-size: 20px;
+}
+
+.notification.success {
+  color: green;
+}
+
+.notification.error {
+  color: red;
 }

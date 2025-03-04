@@ -11,6 +11,7 @@ const App = () => {
   const [newNum, setNewNum] = useState('');
   const [filter, setFilter] = useState('');
   const [message, setMessage] = useState(null);
+  const [errMessage, setErrMessage] = useState(null);
 
   useEffect(() => {
     helper
@@ -55,6 +56,11 @@ const App = () => {
               )
             );
             showMessage(`${existingPerson.name} has been updated`);
+          })
+          .catch((err) => {
+            setErrMessage(
+              `Information of ${existingPerson.name} has already been removed from server.`
+            );
           });
       } else {
         return;
@@ -89,10 +95,15 @@ const App = () => {
   const handleDelete = (id) => {
     if (window.confirm('do you want to delete the contact?')) {
       const personToDelete = persons.find((person) => person.id === id);
-      helper.deleteNum(id).then(() => {
-        showMessage(`${personToDelete.name} has been deleted`);
-        setPersons(persons.filter((person) => person.id !== id));
-      });
+      helper
+        .deleteNum(id)
+        .then(() => {
+          showMessage(`${personToDelete.name} has been deleted`);
+          setPersons(persons.filter((person) => person.id !== id));
+        })
+        .catch((err) => {
+          console.log('fail');
+        });
     } else {
       return;
     }
@@ -101,7 +112,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message} />
+      <Notification message={message} type="success" />
+      <Notification message={errMessage} type="error" />
       <Filter filter={handleFilter} />
       <h3>Add a new</h3>
       <PersonForm

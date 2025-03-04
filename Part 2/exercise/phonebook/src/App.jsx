@@ -3,12 +3,14 @@ import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
 import helper from './helper/api';
+import Notification from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNum, setNewNum] = useState('');
   const [filter, setFilter] = useState('');
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     helper
@@ -21,6 +23,13 @@ const App = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
+
+  const showMessage = (msg) => {
+    setMessage(msg);
+    setTimeout(() => {
+      setMessage(null);
+    }, 2000);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +54,7 @@ const App = () => {
                 person.id !== updatedPerson.id ? person : updatedPerson
               )
             );
+            showMessage(`${existingPerson.name} has been updated`);
           });
       } else {
         return;
@@ -52,6 +62,7 @@ const App = () => {
     } else {
       helper.save(newNameObject).then((data) => {
         setPersons(persons.concat(data));
+        showMessage(`${newNameObject.name} has been added`);
       });
     }
 
@@ -75,10 +86,11 @@ const App = () => {
     person.name.includes(filter)
   );
 
-  //todo alert popup
   const handleDelete = (id) => {
     if (window.confirm('do you want to delete the contact?')) {
+      const personToDelete = persons.find((person) => person.id === id);
       helper.deleteNum(id).then(() => {
+        showMessage(`${personToDelete.name} has been deleted`);
         setPersons(persons.filter((person) => person.id !== id));
       });
     } else {
@@ -89,6 +101,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Filter filter={handleFilter} />
       <h3>Add a new</h3>
       <PersonForm

@@ -66,10 +66,16 @@ const App = () => {
         return;
       }
     } else {
-      helper.save(newNameObject).then((data) => {
-        setPersons(persons.concat(data));
-        showMessage(`${newNameObject.name} has been added`);
-      });
+      helper
+        .save(newNameObject)
+        .then((data) => {
+          setPersons(persons.concat(data));
+          showMessage(`${newNameObject.name} has been added`);
+        })
+        .catch((err) => {
+          console.log(err.response.data.error);
+          setErrMessage(`${err.response.data.error}`);
+        });
     }
 
     setNewName('');

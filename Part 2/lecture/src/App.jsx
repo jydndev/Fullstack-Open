@@ -9,6 +9,8 @@ const App = () => {
   const [newNote, setNewNote] = useState('a new note');
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
@@ -55,9 +57,35 @@ const App = () => {
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log('logged in with', username, password);
+  };
+
   return (
     <div>
       <h1>Notes</h1>
+      <form onSubmit={handleLogin}>
+        <div>
+          username
+          <input
+            type="text"
+            value={username}
+            name="Username"
+            onChange={({ target }) => setUserName(target.value)}
+          />
+        </div>
+        <div>
+          password
+          <input
+            type="password"
+            value={password}
+            name="Password"
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <button type="submit">login</button>
+      </form>
       <Notification message={errorMessage} />
       <div>
         <button onClick={() => setShowAll(!showAll)}>

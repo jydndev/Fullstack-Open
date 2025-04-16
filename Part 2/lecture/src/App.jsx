@@ -80,6 +80,7 @@ const App = () => {
       <button type="submit">login</button>
     </form>;
   };
+
   const noteForm = () => {
     <form onSubmit={addNote}>
       <input value={newNote} onChange={handleNoteChange} />

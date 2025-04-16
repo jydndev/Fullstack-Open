@@ -57,7 +57,7 @@ const App = () => {
     setNewNote(e.target.value);
   };
 
-  const loginForm = () => {
+  const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
         username
@@ -78,15 +78,15 @@ const App = () => {
         />
       </div>
       <button type="submit">login</button>
-    </form>;
-  };
+    </form>
+  );
 
-  const noteForm = () => {
+  const noteForm = () => (
     <form onSubmit={addNote}>
       <input value={newNote} onChange={handleNoteChange} />
       <button type="submit">save</button>
-    </form>;
-  };
+    </form>
+  );
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -94,6 +94,7 @@ const App = () => {
     e.preventDefault();
     try {
       const user = await loginService.login({ username, password });
+      noteService.setToken(user.token);
       setUser(user);
       setUserName('');
       setPassword('');
@@ -110,14 +111,15 @@ const App = () => {
       <h1>Notes</h1>
 
       <Notification message={errorMessage} />
-      {user === null ? (
-        loginForm()
-      ) : (
+
+      {!user && loginForm()}
+      {user && (
         <div>
-          <p>{user.name} logged-in</p>
-          noteForm()
+          <p>{user.name} logged in</p>
+          {noteForm()}
         </div>
       )}
+
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all'}

@@ -86,16 +86,13 @@ const App = () => {
     }
   };
 
-  const loginForm = () => {
-    const hiddenWhenVisible = { display: loginVisible ? 'none' : '' };
-    const showWhenVisible = { display: loginVisible ? '' : 'none' };
-
     return (
       <div>
-        <div style={hiddenWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>log in</button>
-        </div>
-        <div style={showWhenVisible}>
+        <h1>Notes</h1>
+          <Notification message={errorMessage} />
+
+      {!user && (
+        <Togglable buttonLabel="login">
           <LoginForm
             username={username}
             password={password}
@@ -103,22 +100,12 @@ const App = () => {
             handlePasswordChange={({ target }) => setPassword(target.value)}
             handleSubmit={handleLogin}
           />
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div>
-      <h1>Notes</h1>
-      <Notification message={errorMessage} />
-
-      {!user && loginForm()}
+          </Togglable>
+      )}
       {user && (
         <div>
           <p>{user.name} logged in</p>
-          <Togglable>
+          <Togglable buttonLabel="new note">
             <NoteForm createNote={addNote} />
           </Togglable>
         </div>

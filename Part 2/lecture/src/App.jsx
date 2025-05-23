@@ -5,6 +5,8 @@ import noteService from './services/notes';
 import Footer from './components/Footer';
 import loginService from './services/login';
 import LoginForm from './components/LoginForm';
+import Togglable from './components/Togglable';
+import NoteForm from './components/NoteForm';
 
 const App = () => {
   const [loginVisible, setLoginVisible] = useState(false);
@@ -128,7 +130,9 @@ const App = () => {
       {user && (
         <div>
           <p>{user.name} logged in</p>
-          {noteForm()}
+          <Togglable>
+            <NoteForm createNote={addNote} />
+          </Togglable>
         </div>
       )}
 

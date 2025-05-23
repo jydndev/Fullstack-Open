@@ -33,16 +33,9 @@ const App = () => {
     }
   }, []);
 
-  const addNote = (event) => {
-    event.preventDefault();
-    const noteObject = {
-      content: newNote,
-      important: Math.random() > 0.5,
-    };
-
+  const addNote = (noteObject) => {
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote));
-      setNewNote('');
     });
   };
 
@@ -86,10 +79,10 @@ const App = () => {
     }
   };
 
-    return (
-      <div>
-        <h1>Notes</h1>
-          <Notification message={errorMessage} />
+  return (
+    <div>
+      <h1>Notes</h1>
+      <Notification message={errorMessage} />
 
       {!user && (
         <Togglable buttonLabel="login">
@@ -100,7 +93,7 @@ const App = () => {
             handlePasswordChange={({ target }) => setPassword(target.value)}
             handleSubmit={handleLogin}
           />
-          </Togglable>
+        </Togglable>
       )}
       {user && (
         <div>

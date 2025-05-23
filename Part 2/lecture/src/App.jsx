@@ -66,8 +66,24 @@ const App = () => {
       });
   };
 
-  const handleNoteChange = (e) => {
-    setNewNote(e.target.value);
+  const notesToShow = showAll ? notes : notes.filter((note) => note.important);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await loginService.login({ username, password });
+
+      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user));
+      noteService.setToken(user.token);
+      setUser(user);
+      setUserName('');
+      setPassword('');
+    } catch (err) {
+      setErrorMessage('Wrong credentials');
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    }
   };
 
   const loginForm = () => {
@@ -91,33 +107,6 @@ const App = () => {
         </div>
       </div>
     );
-  };
-
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input value={newNote} onChange={handleNoteChange} />
-      <button type="submit">save</button>
-    </form>
-  );
-
-  const notesToShow = showAll ? notes : notes.filter((note) => note.important);
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const user = await loginService.login({ username, password });
-
-      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user));
-      noteService.setToken(user.token);
-      setUser(user);
-      setUserName('');
-      setPassword('');
-    } catch (err) {
-      setErrorMessage('Wrong credentials');
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
-    }
   };
 
   return (

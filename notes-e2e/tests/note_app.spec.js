@@ -18,8 +18,8 @@ describe('Note app', () => {
 
     await page.getByRole('button', { name: 'login' }).click();
 
-    await page.getByRole('textbox').first().fill('mluukai');
-    await page.getByRole('textbox').last().fill('salainen');
+    await page.getByTestId('username').fill('mluukai');
+    await page.getByTestId('password').fill('salainen');
     await page.getByRole('button', { name: 'login' }).click();
 
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible();

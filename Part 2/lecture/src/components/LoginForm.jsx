@@ -23,7 +23,7 @@ const LoginForm = ({
         <div>
           password
           <input
-            date-testid="password"
+            data-testid="password"
             type="password"
             value={password}
             onChange={handlePasswordChange}

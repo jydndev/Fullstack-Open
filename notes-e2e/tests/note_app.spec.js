@@ -1,4 +1,4 @@
-const { test, describe, expect } = require('@playwright/test');
+const { test, describe, expect, beforeEach } = require('@playwright/test');
 
 describe('Note app', () => {
   beforeEach(async ({ page }) => {
@@ -10,7 +10,7 @@ describe('Note app', () => {
     await expect(locator).toBeVisible();
     await expect(
       page.getByText(
-        'Note app, Department of Computer Science, University of Helsinki 2024'
+        'Note app, Department of Computer Science, University of Helsinki 2025'
       )
     ).toBeVisible();
   });

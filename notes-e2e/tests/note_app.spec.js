@@ -20,7 +20,7 @@ describe('Note app', () => {
 
     await page.getByRole('button', { name: 'login' }).click();
 
-    await page.getByTestId('username').fill('mluukai');
+    await page.getByTestId('username').fill('mluukkai');
     await page.getByTestId('password').fill('salainen');
     // make sure data exists in db
     await page.getByRole('button', { name: 'login' }).click();

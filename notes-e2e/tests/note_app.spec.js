@@ -76,4 +76,22 @@ describe('Note app', () => {
       });
     });
   });
+
+  describe('and several notes exist', () => {
+    beforeEach(async ({ page }) => {
+      await createNote(page, 'first note');
+      await createNote(page, 'second note');
+    });
+
+    test('one of those can be made nonimportant', async ({ page }) => {
+      await page
+        .getByText('first note')
+        .getByRole('button', { name: 'make not important' })
+        .click();
+
+      await expect(
+        page.getByText('first note').getByText('make important')
+      ).toBeVisible();
+    });
+  });
 });

@@ -34,6 +34,30 @@ describe('Note app', () => {
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible();
   });
 
+  test('user can log in with correct credentials', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click();
+    await page.getByTestId('username').fill('mluukkai');
+    await page.getByTestId('password').fill('salainen');
+    await page.getByRole('button', { name: 'login' }).click();
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible();
+  });
+
+  test('login fails with wrong password', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click();
+    await page.getByTestId('username').fill('mluukkai');
+    await page.getByTestId('password').fill('wrong');
+    await page.getByRole('button', { name: 'login' }).click();
+
+    const errorDiv = await page.locator('.error');
+    await expect(errorDiv).toContainText('wrong credentials');
+    await expect(errorDiv).toHaveCSS('border-style', 'solid');
+    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)');
+
+    await expect(
+      page.getByText('Matti Luukkainen logged in')
+    ).not.toBeVisible();
+  });
+
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await page.getByRole('button', { name: 'login' }).click();
@@ -63,21 +87,5 @@ describe('Note app', () => {
         await expect(await page.getByText('make important')).toBeVisible();
       });
     });
-  });
-
-  test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click();
-    await page.getByTestId('username').fill('mluukkai');
-    await page.getByTestId('password').fill('wrong');
-    await page.getByRole('button', { name: 'login' }).click();
-
-    const errorDiv = await page.locator('.error');
-    await expect(errorDiv).toContainText('wrong credentials');
-    await expect(errorDiv).toHaveCSS('border-style', solid);
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)');
-
-    await expect(
-      page.getByText('Matti Luukkainen logged in')
-    ).not.toBeVisible();
   });
 });

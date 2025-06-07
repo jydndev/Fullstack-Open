@@ -41,10 +41,7 @@ describe('Note app', () => {
   });
 
   test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click();
-    await page.getByTestId('username').fill('mluukkai');
-    await page.getByTestId('password').fill('wrong');
-    await page.getByRole('button', { name: 'login' }).click();
+    await loginWith(page, 'mluukkai', 'wrong');
 
     const errorDiv = await page.locator('.error');
     await expect(errorDiv).toContainText('wrong credentials');
@@ -52,7 +49,7 @@ describe('Note app', () => {
     await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)');
 
     await expect(
-      page.getByText('Matti Luukkainen logged in')
+      await page.getByText('Matti Luukkainen logged in')
     ).not.toBeVisible();
   });
 
@@ -62,7 +59,7 @@ describe('Note app', () => {
     });
 
     test('a new note can be created', async ({ page }) => {
-      await createNote(page, 'a note created by playwright');
+      await createNote(page, 'a note created by playwright', true);
       await expect(
         await page.getByText('a note created by playwright')
       ).toBeVisible();
@@ -70,7 +67,7 @@ describe('Note app', () => {
 
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
-        await createNote(page, 'another note by playwright');
+        await createNote(page, 'another note by playwright', true);
       });
 
       test('importance can be changed', async ({ page }) => {

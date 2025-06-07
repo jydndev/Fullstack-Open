@@ -1,4 +1,5 @@
 const { test, describe, expect, beforeEach } = require('@playwright/test');
+const { loginWith } = require('./helper');
 
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
@@ -35,10 +36,7 @@ describe('Note app', () => {
   });
 
   test('user can log in with correct credentials', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click();
-    await page.getByTestId('username').fill('mluukkai');
-    await page.getByTestId('password').fill('salainen');
-    await page.getByRole('button', { name: 'login' }).click();
+    await loginWith(page, 'mluukkai', 'salainen');
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible();
   });
 
@@ -60,10 +58,7 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'login' }).click();
-      await page.getByTestId('username').fill('mluukkai');
-      await page.getByTestId('password').fill('salainen');
-      await page.getByRole('button', { name: 'login' }).click();
+      await loginWith(page, 'mluukkai', 'salainen');
     });
 
     test('a new note can be created', async ({ page }) => {

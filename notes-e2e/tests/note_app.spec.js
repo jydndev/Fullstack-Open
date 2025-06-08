@@ -49,7 +49,7 @@ describe('Note app', () => {
     await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)');
 
     await expect(
-      await page.getByText('Matti Luukkainen logged in')
+      page.getByText('Matti Luukkainen logged in')
     ).not.toBeVisible();
   });
 
@@ -61,18 +61,19 @@ describe('Note app', () => {
     test('a new note can be created', async ({ page }) => {
       await createNote(page, 'a note created by playwright', true);
       await expect(
-        await page.getByText('a note created by playwright')
+        page.getByText('a note created by playwright')
       ).toBeVisible();
     });
 
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
-        await createNote(page, 'first note');
-        await createNote(page, 'second note');
-        await createNote(page, 'third note');
+        await createNote(page, 'first note', true);
+        await createNote(page, 'second note', true);
+        await createNote(page, 'third note', true);
       });
 
       test('importance can be changed', async ({ page }) => {
+        await page.pause();
         const otherNoteText = await page.getByText('second note');
         const otherNoteElement = await otherNoteText.locator('..');
 
@@ -81,7 +82,7 @@ describe('Note app', () => {
           .click();
 
         await expect(
-          await otherNoteElement.getByText('make important')
+          otherNoteElement.getByText('make important')
         ).toBeVisible();
       });
     });

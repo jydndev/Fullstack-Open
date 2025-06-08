@@ -1,13 +1,14 @@
 const counterReducer = (state = 0, action) => {
-  if (action.type === 'INCREMENT') {
-    return state + 1;
-  } else if (action.type === 'DECREMENT') {
-    return state - 1;
-  } else if (action.type === 'ZERO') {
-    return 0;
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    case 'ZERO':
+      return 0;
+    default: // if none of the above matches, code comes here
+      return state;
   }
-
-  return state;
 };
 
 function App() {

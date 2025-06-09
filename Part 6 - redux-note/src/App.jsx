@@ -13,13 +13,20 @@ const counterReducer = (state = 0, action) => {
   }
 };
 
-const store = createStore(counterReducer);
+export const store = createStore(counterReducer);
 
 function App() {
   return (
-    <>
-      <div></div>
-    </>
+    <div>
+      <div>{store.getState()}</div>
+      <button onClick={(e) => store.dispatch({ type: 'INCREMENT' })}>
+        plus
+      </button>
+      <button onClick={(e) => store.dispatch({ type: 'DECREMENT' })}>
+        minus
+      </button>
+      <button onClick={(e) => store.dispatch({ type: 'ZERO' })}>zero</button>
+    </div>
   );
 }
 

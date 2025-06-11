@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleImportanceOf } from '../reducers/noteReducer';
 
+// presentational component
 const Note = ({ note, handleClick }) => {
   return (
     <li onClick={handleClick}>
@@ -10,6 +11,7 @@ const Note = ({ note, handleClick }) => {
   );
 };
 
+// container component
 const Notes = () => {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state);

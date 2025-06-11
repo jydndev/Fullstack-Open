@@ -23,7 +23,7 @@ const App = () => {
         <button type="submit">add</button>
       </form>
       <ul>
-        {store.getState().map((note) => (
+        {notes.map((note) => (
           <li key={note.id} onClick={() => toggleImportance(note.id)}>
             {note.content}
             <strong>{note.important ? 'important' : ''}</strong>

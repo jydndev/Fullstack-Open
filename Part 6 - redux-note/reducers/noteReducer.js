@@ -11,7 +11,6 @@ const noteReducer = (state = [], action) => {
       };
       return state.map((note) => (note.id !== id ? note : changedNote));
     }
-
     default:
       return state;
   }
@@ -19,7 +18,7 @@ const noteReducer = (state = [], action) => {
 
 const generateId = () => Number((Math.random() * 1000000).toFixed(0));
 
-const createNote = (content) => {
+export const createNote = (content) => {
   return {
     type: 'NEW_NOTE',
     payload: {
@@ -30,28 +29,11 @@ const createNote = (content) => {
   };
 };
 
-const toggleImportanceOf = (id) => {
+export const toggleImportanceOf = (id) => {
   return {
     type: 'TOGGLE_IMPORTANCE',
     payload: { id },
   };
 };
-// store.dispatch({
-//   type: 'NEW_NOTE',
-//   payload: {
-//     content: 'the app state is in redux store',
-//     important: true,
-//     id: 1,
-//   },
-// });
-
-// store.dispatch({
-//   type: 'NEW_NOTE',
-//   payload: {
-//     content: 'state changes are made with actions',
-//     important: false,
-//     id: 2,
-//   },
-// });
 
 export default noteReducer;

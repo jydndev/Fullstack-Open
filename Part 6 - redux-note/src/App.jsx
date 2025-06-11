@@ -1,13 +1,19 @@
+import { createNote, toggleImportanceOf } from '../reducers/noteReducer';
+import { useSelector, useDispatch } from 'react-redux';
+
 const App = () => {
+  const dispatch = useDispatch();
+  const notes = useSelector((state) => state);
+
   const addNote = (e) => {
     e.preventDefault();
     const content = e.target.note.value;
     e.target.note.value = '';
-    store.dispatch(createNote(content));
+    dispatch(createNote(content));
   };
 
   const toggleImportance = (id) => {
-    store.dispatch(toggleImportanceOf(id));
+    dispatch(toggleImportanceOf(id));
   };
 
   return (

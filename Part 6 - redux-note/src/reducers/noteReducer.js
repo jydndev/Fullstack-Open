@@ -39,6 +39,9 @@ const noteSlice = createSlice({
   },
 });
 
+export const { createNote, toggleImportanceOf } = noteSlice.actions;
+export default noteSlice.reducer;
+
 // const noteReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     case 'NEW_NOTE':

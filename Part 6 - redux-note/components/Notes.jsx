@@ -14,7 +14,7 @@ const Note = ({ note, handleClick }) => {
 // container component
 const Notes = () => {
   const dispatch = useDispatch();
-  const notes = useSelector((state) => state);
+  const notes = useSelector((state) => state.notes);
 
   return (
     <ul>

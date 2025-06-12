@@ -6,7 +6,7 @@ import noteReducer from '../reducers/noteReducer';
 import filterReducer from '../reducers/filterReducer';
 
 const reducer = combineReducers({
-  note: noteReducer,
+  notes: noteReducer,
   filter: filterReducer,
 });
 

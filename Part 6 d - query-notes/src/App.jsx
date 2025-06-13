@@ -8,7 +8,8 @@ const App = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] }),
   });
 
-  const updateNoteMutation = useMutation(updateNote, {
+  const updateNoteMutation = useMutation({
+    mutationFn: updateNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
     },

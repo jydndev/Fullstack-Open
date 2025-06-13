@@ -33,9 +33,12 @@ export const initializeNotes = () => {
   };
 };
 
-// const createNote = (content) => {
-//   state.push(action.payload);
-// };
+export const createNote = (content) => {
+  return async (dispatch) => {
+    const newNote = await noteService.createNew(content);
+    dispatch(appendNote(newNote));
+  };
+};
 
 export const { toggleImportanceOf, appendNote, setNotes } = noteSlice.actions;
 

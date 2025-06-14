@@ -35,4 +35,4 @@ export const useCounterDispatch = () => {
   return counterAndDispatch[1];
 };
 
-export default createContext;
+export default CounterContext;

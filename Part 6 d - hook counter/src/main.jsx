@@ -3,7 +3,7 @@ import App from './App';
 import { CounterContextProvider } from './CounterContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <CounterContext.Provider>
+  <CounterContextProvider>
     <App />
-  </CounterContext.Provider>
+  </CounterContextProvider>
 );

@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useCounterDispatch } from '../CounterContext';
 
 const Button = ({ type, label }) => {

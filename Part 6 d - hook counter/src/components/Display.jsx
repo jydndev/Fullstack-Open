@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useCounterValue } from '../CounterContext';
 
 const Display = () => {

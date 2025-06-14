@@ -20,14 +20,14 @@ const App = () => {
   const [counter, counterDispatch] = useReducer(counterReducer, 0);
 
   return (
-    <div>
+    <CounterContext.Provider value={[counter, counterDispatch]}>
       <Display counter={counter} />
       <div>
         <Button dispatch={counterDispatch} type="INC" label="+" />
         <Button dispatch={counterDispatch} type="DEC" label="-" />
         <Button dispatch={counterDispatch} type="ZERO" label="0" />
       </div>
-    </div>
+    </CounterContext.Provider>
   );
 };
 

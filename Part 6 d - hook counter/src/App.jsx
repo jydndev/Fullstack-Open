@@ -21,11 +21,11 @@ const App = () => {
 
   return (
     <CounterContext.Provider value={[counter, counterDispatch]}>
-      <Display counter={counter} />
+      <Display />
       <div>
-        <Button dispatch={counterDispatch} type="INC" label="+" />
-        <Button dispatch={counterDispatch} type="DEC" label="-" />
-        <Button dispatch={counterDispatch} type="ZERO" label="0" />
+        <Button type="INC" label="+" />
+        <Button type="DEC" label="-" />
+        <Button type="ZERO" label="0" />
       </div>
     </CounterContext.Provider>
   );

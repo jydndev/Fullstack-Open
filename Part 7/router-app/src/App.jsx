@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useParams,
+} from 'react-router-dom';
 import { useState } from 'react';
 
 const Home = () => (
@@ -123,6 +129,7 @@ const App = () => {
         </div>
 
         <Routes>
+          <Route path="/notes/:id" element={<Note notes={notes} />} />
           <Route path="/notes" element={<Notes notes={notes} />} />
           <Route path="/users" element={<Users />} />
           <Route path="/" element={<Home />} />

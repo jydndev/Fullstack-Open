@@ -150,10 +150,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>
-
-      <div>
-        <i>Note app, Department of Computer Science</i>
-      </div>
+      <footer>
+        <br />
+        <em>Note app, Department of Computer Science</em>
+      </footer>
     </div>
   );
 };

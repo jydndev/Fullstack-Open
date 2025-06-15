@@ -153,7 +153,7 @@ const App = () => {
           path="/users"
           element={user ? <Users /> : <Navigate replace to="/login" />}
         />
-        <Route path="/login" element={<Login onLogin={login} />}></Route>
+        <Route path="/login" element={<Login onLogin={login} />} />
         <Route path="/" element={<Home />} />
       </Routes>
       <footer>

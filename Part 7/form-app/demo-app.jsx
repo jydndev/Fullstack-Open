@@ -1,32 +1,24 @@
 import useField from './useField';
 
 const App = () => {
-  const name = useField();
-  const birthdate = useField();
-  const height = useField();
+  const name = useField('text');
+  const birthdate = useField('date');
+  const height = useField('number');
 
   return (
     <div>
       <form>
         name:
-        <input type={name.type} value={name.value} onChange={name.onChange} />
+        <input {...name} />
         <br />
         birthdate:
-        <input
-          type={birthdate.type}
-          value={birthdate.value}
-          onChange={birthdate.onChange}
-        />
+        <input {...birthdate} />
         <br />
         height:
-        <input
-          type={height.type}
-          value={height.value}
-          onChange={height.onChange}
-        />
+        <input {...height} />
       </form>
       <div>
-        {name} {birthdate} {height}
+        {name.value} {birthdate.value} {height.value}
       </div>
     </div>
   );

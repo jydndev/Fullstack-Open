@@ -5,6 +5,7 @@ import {
   useParams,
   useNavigate,
   Navigate,
+  useMatch,
 } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -25,9 +26,7 @@ const Home = () => (
   </div>
 );
 
-const Note = ({ notes }) => {
-  const id = useParams().id;
-  const note = notes.find((n) => n.id === Number(id));
+const Note = ({ note }) => {
   return (
     <div>
       <h2>{note.content}</h2>
@@ -116,6 +115,12 @@ const App = () => {
     setUser(user);
   };
 
+  const match = useMatch('/notes/:id');
+
+  const note = match
+    ? notes.find((n) => n.id === Number(match.params.id))
+    : null;
+
   const padding = {
     padding: 5,
   };
@@ -142,7 +147,7 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path="/notes/:id" element={<Note notes={notes} />} />
+        <Route path="/notes/:id" element={<Note note={note} />} />
         <Route path="/notes" element={<Notes notes={notes} />} />
         <Route
           path="/users"

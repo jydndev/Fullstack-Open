@@ -43,7 +43,7 @@ const Note = ({ note }) => {
 const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
-    <Table stiped>
+    <Table striped>
       <tbody>
         {notes.map((note) => (
           <tr key={note.id}>

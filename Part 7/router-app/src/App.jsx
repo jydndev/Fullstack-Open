@@ -9,7 +9,24 @@ import {
 } from 'react-router-dom';
 import { useState } from 'react';
 
-import { Table, Form, Button, Alert, Navbar, Nav } from 'react-bootstrap';
+import {
+  // Table,
+  Form,
+  Button,
+  Alert,
+  Navbar,
+  Nav,
+} from 'react-bootstrap';
+
+import {
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Paper,
+} from '@mui/material';
 
 const Home = () => (
   <div>
@@ -43,18 +60,21 @@ const Note = ({ note }) => {
 const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
-    <Table striped>
-      <tbody>
-        {notes.map((note) => (
-          <tr key={note.id}>
-            <td>
-              <Link to={`/notes/${note.id}`}>{note.content}</Link>
-            </td>
-            <td>{note.user}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+
+    <TableContainer component={Paper}>
+      <Table>
+        <TableBody>
+          {notes.map((note) => (
+            <TableRow key={note.id}>
+              <TableCell>
+                <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              </TableCell>
+              <TableCell>{note.user}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   </div>
 );
 
@@ -142,53 +162,55 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      {message && <Alert variant="success">{message}</Alert>}
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#" as="span">
-              <Link style={padding} to="/">
-                home
-              </Link>
-            </Nav.Link>
-            <Nav.Link href="#" as="span">
-              <Link style={padding} to="/notes">
-                notes
-              </Link>
-            </Nav.Link>
-            <Nav.Link href="#" as="span">
-              <Link style={padding} to="/users">
-                users
-              </Link>
-            </Nav.Link>
-            <Nav.Link href="#" as="span">
-              {user ? (
-                <em>{user} logged in</em>
-              ) : (
-                <Link to="/login">login</Link>
-              )}
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+    <Container>
+      <div className="container">
+        {message && <Alert variant="success">{message}</Alert>}
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="#" as="span">
+                <Link style={padding} to="/">
+                  home
+                </Link>
+              </Nav.Link>
+              <Nav.Link href="#" as="span">
+                <Link style={padding} to="/notes">
+                  notes
+                </Link>
+              </Nav.Link>
+              <Nav.Link href="#" as="span">
+                <Link style={padding} to="/users">
+                  users
+                </Link>
+              </Nav.Link>
+              <Nav.Link href="#" as="span">
+                {user ? (
+                  <em>{user} logged in</em>
+                ) : (
+                  <Link to="/login">login</Link>
+                )}
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
 
-      <Routes>
-        <Route path="/notes/:id" element={<Note note={note} />} />
-        <Route path="/notes" element={<Notes notes={notes} />} />
-        <Route
-          path="/users"
-          element={user ? <Users /> : <Navigate replace to="/login" />}
-        />
-        <Route path="/login" element={<Login onLogin={login} />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-      <footer>
-        <br />
-        <em>Note app, Department of Computer Science</em>
-      </footer>
-    </div>
+        <Routes>
+          <Route path="/notes/:id" element={<Note note={note} />} />
+          <Route path="/notes" element={<Notes notes={notes} />} />
+          <Route
+            path="/users"
+            element={user ? <Users /> : <Navigate replace to="/login" />}
+          />
+          <Route path="/login" element={<Login onLogin={login} />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <footer>
+          <br />
+          <em>Note app, Department of Computer Science</em>
+        </footer>
+      </div>
+    </Container>
   );
 };
 

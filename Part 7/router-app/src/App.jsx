@@ -26,6 +26,7 @@ import {
   TableContainer,
   TableRow,
   Paper,
+  TextField,
 } from '@mui/material';
 
 const Home = () => (
@@ -98,22 +99,43 @@ const Login = (props) => {
     navigate('/');
   };
 
+  // Bootstrap
+  // return (
+  //   <div>
+  //     <h2>login</h2>
+  //     <Form onSubmit={onSubmit}>
+  //       <Form.Group>
+  //         <Form.Label>username:</Form.Label>
+  //         <Form.Control type="text" name="username" />
+  //       </Form.Group>
+  //       <Form.Group>
+  //         <Form.Label>password:</Form.Label>
+  //         <Form.Control type="password" />
+  //       </Form.Group>
+  //       <Button variant="primary" type="submit">
+  //         login
+  //       </Button>
+  //     </Form>
+  //   </div>
+  // );
+
+  // mui
   return (
     <div>
       <h2>login</h2>
-      <Form onSubmit={onSubmit}>
-        <Form.Group>
-          <Form.Label>username:</Form.Label>
-          <Form.Control type="text" name="username" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>password:</Form.Label>
-          <Form.Control type="password" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          login
-        </Button>
-      </Form>
+      <form onSubmit={onSubmit}>
+        <div>
+          <TextField label="username" />
+        </div>
+        <div>
+          <TextField label="password" type="password" />
+        </div>
+        <div>
+          <Button variant="contained" color="primary" type="submit">
+            login
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };

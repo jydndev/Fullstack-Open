@@ -12,7 +12,7 @@ import { useState } from 'react';
 import {
   // Table,
   Form,
-  Button,
+  // Button,
   Alert,
   Navbar,
   Nav,
@@ -27,6 +27,10 @@ import {
   TableRow,
   Paper,
   TextField,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
 } from '@mui/material';
 
 const Home = () => (
@@ -187,7 +191,7 @@ const App = () => {
     <Container>
       <div className="container">
         {message && <Alert variant="success">{message}</Alert>}
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
@@ -215,7 +219,28 @@ const App = () => {
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
+        </Navbar> */}
+
+        <AppBar position="static">
+          <Toolbar>
+            <Button color="inherit" component={Link} to="/">
+              home
+            </Button>
+            <Button color="inherit" component={Link} to="/notes">
+              notes
+            </Button>
+            <Button color="inherit" component={Link} to="/users">
+              users
+            </Button>
+            {user ? (
+              <em>{user} logged in</em>
+            ) : (
+              <Button color="inherit" component={Link} to="/login">
+                login
+              </Button>
+            )}
+          </Toolbar>
+        </AppBar>
 
         <Routes>
           <Route path="/notes/:id" element={<Note note={note} />} />

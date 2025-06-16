@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import { useState } from 'react';
 
-import Table from 'react-bootstrap/Table';
+import { Table, Form, Button } from 'react-bootstrap';
 
 const Home = () => (
   <div>
@@ -81,15 +81,19 @@ const Login = (props) => {
   return (
     <div>
       <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          username: <input />
-        </div>
-        <div>
-          password: <input type="password" />
-        </div>
-        <button type="submit">login</button>
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control type="text" name="username" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>password:</Form.Label>
+          <Form.Control type="password" />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          login
+        </Button>
+      </Form>
     </div>
   );
 };

@@ -4,7 +4,7 @@
   "description": "practicing webpack",
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "devDependencies": {

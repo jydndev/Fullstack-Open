@@ -1,3 +1,7 @@
+import React from 'react';
+import { useState } from 'react';
+import './index.css';
+
 const App = () => {
   const [counter, setCounter] = useState(0);
 
@@ -15,3 +19,5 @@ const App = () => {
     </div>
   );
 };
+
+export default App;

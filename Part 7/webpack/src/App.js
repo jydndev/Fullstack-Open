@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
+import axios from 'axios';
+
+const useNotes = (url) => {
+  const [notes, setNotes] = useState([]);
+  useEffect(() => {
+    axios.get(url).then((res) => setNotes(res.data));
+  }, [url]);
+  return notes;
+};
 
 const App = () => {
   const [counter, setCounter] = useState(0);

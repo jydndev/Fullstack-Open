@@ -19,7 +19,11 @@ const App = () => {
     return <div>loading...</div>;
   }
 
-  return <Persons persons={result.data.allPersons} />;
+  return (
+    <div>
+      <Persons persons={result.data.allPersons} />
+    </div>
+  );
 };
 
 export default App;

@@ -1,9 +1,28 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache(),
+});
+
+const query = gql`
+  query {
+    allPersons {
+      name
+      phone
+      addreess {
+        street
+        city
+      }
+    }
+  }
+`;
+
+client.query({ query }).then((res) => {
+  console.log(res.data);
+});
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);

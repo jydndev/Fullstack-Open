@@ -39,9 +39,14 @@ const typeDefs = `
     id: ID!
   }
 
+  enum YesNo {
+    YES
+    NO
+  }
+
   type Query {
     personCount: Int!
-    allPersons: [Person!]!
+    allPersons(phone: YesNo): [Person!]!
     findPerson(name: String!): Person
   }
 
@@ -58,7 +63,15 @@ const typeDefs = `
 const resolvers = {
   Query: {
     personCount: () => persons.length,
-    allPersons: () => persons,
+    allPersons: (root, args) => {
+      if (!args.phone) {
+        return person;
+      }
+
+      const byPhone = (person) =>
+        args.phone === 'YES' ? person.phone : !person.phone;
+      return persons.filter(byPhone);
+    },
     findPerson: (root, args) => persons.find((p) => p.name === args.name),
   },
   Person: {
@@ -70,8 +83,8 @@ const resolvers = {
     },
   },
   Mutation: {
-    addperson: (root, argv) => {
-      if (persons.find((p) => p.name === argv.name)) {
+    addperson: (root, args) => {
+      if (persons.find((p) => p.name === args.name)) {
         throw new GraphQLError('Name must be unique', {
           extensions: {
             code: 'BAD_USER_INPUT',
@@ -79,7 +92,7 @@ const resolvers = {
           },
         });
       }
-      const person = { ...argv, id: uuid() };
+      const person = { ...args, id: uuid() };
       persons = persons.concat(person);
       return person;
     },

@@ -1,5 +1,6 @@
 const { ApolloServer } = require('@apollo/server');
 const { startStandaloneServer } = require('@apollo/server/standalone');
+const { v1: uuid } = require('uuid');
 
 let persons = [
   {
@@ -65,6 +66,13 @@ const resolvers = {
         street,
         city,
       };
+    },
+  },
+  Mutation: {
+    addperson: (root, argv) => {
+      const person = { ...argv, id: uuid() };
+      persons = persons.concat(person);
+      return person;
     },
   },
 };

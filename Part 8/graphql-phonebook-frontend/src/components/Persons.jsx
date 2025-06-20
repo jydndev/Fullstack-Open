@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import Person from './Person';
 import { useState } from 'react';
 
-import FIND_PERSON from '../queries';
+import { FIND_PERSON } from '../queries';
 
 const Persons = ({ persons }) => {
   const [nameToSearch, setNameToSearch] = useState(null);

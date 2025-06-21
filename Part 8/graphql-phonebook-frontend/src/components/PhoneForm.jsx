@@ -6,17 +6,17 @@ import { EDIT_NUMBER } from '../queries';
 
 const PhoneForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const [changeNumber] = useMutation(EDIT_NUMBER);
+  const [changephone] = useMutation(EDIT_NUMBER);
 
   const submit = (e) => {
     e.preventDefault();
 
-    changeNumber({ variables: { name, number } });
+    changephone({ variables: { name, phone } });
 
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -30,10 +30,10 @@ const PhoneForm = () => {
           />
         </div>
         <div>
-          number
+          phone
           <input
-            value={number}
-            onChange={({ target }) => setNumber(target.value)}
+            value={phone}
+            onChange={({ target }) => setPhone(target.value)}
           />
         </div>
       </form>

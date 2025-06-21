@@ -8,12 +8,12 @@ const PhoneForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
-  const [changephone] = useMutation(EDIT_NUMBER);
+  const [changeNumber] = useMutation(EDIT_NUMBER);
 
   const submit = (e) => {
     e.preventDefault();
 
-    changephone({ variables: { name, phone } });
+    changeNumber({ variables: { name, phone } });
 
     setName('');
     setPhone('');
@@ -21,6 +21,7 @@ const PhoneForm = () => {
 
   return (
     <div>
+      <h2>change number</h2>
       <form onSubmit={submit}>
         <div>
           name
@@ -36,8 +37,8 @@ const PhoneForm = () => {
             onChange={({ target }) => setPhone(target.value)}
           />
         </div>
+        <button type="submit">change number</button>
       </form>
-      <button type="submit">submit</button>
     </div>
   );
 };

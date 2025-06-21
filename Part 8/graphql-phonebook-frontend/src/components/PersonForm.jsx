@@ -12,9 +12,14 @@ const PersonForm = () => {
     refetchQueries: [{ query: ALL_PERSONS }],
   });
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    createPerson({ variable: { name, phone, street, city } });
+    createPerson({ variables: { name, phone, street, city } });
+
+    setName('');
+    setPhone('');
+    setStreet('');
+    setCity('');
   };
 
   return (

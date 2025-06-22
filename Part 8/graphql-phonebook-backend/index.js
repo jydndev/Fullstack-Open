@@ -3,6 +3,25 @@ const { startStandaloneServer } = require('@apollo/server/standalone');
 const { v1: uuid } = require('uuid');
 const { GraphQLError } = require('graphql');
 
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
+const Person = require('./models/person');
+
+require('dotenv').config();
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+console.log('connecting to mongodb', MONGODB_URI);
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to ', MONGODB_URI);
+  })
+  .catch((err) => {
+    console.log('error connection to MongoDB:', err.message);
+  });
+
 let persons = [
   {
     name: 'Arto Hellas',

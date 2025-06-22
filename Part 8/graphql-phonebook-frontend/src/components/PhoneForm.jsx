@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import { EDIT_NUMBER } from '../queries';
 
-const PhoneForm = (({setError})) => {
+const PhoneForm = ({ setError }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 

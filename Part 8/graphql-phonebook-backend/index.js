@@ -11,12 +11,12 @@ require('dotenv').config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-console.log('connecting to mongodb', MONGODB_URI);
+console.log('connecting to', MONGODB_URI)
 
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    console.log('connected to ', MONGODB_URI);
+    console.log('connected to MongoDB')
   })
   .catch((err) => {
     console.log('error connection to MongoDB:', err.message);
@@ -100,7 +100,7 @@ const resolvers = {
 
       return Person.find({ phone: { $exists: args.phone === 'YES' } });
     },
-    findPerson: (root, args) => Person.findOne({ name: args.name }),
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
   },
   Person: {
     address: ({ street, city }) => {
@@ -117,9 +117,7 @@ const resolvers = {
       try {
         await person.save();
       } catch (error) {
-        throw (
-          (new GrraphQLError('Saving person failed'),
-          {
+        throw new GraphQLError('Saving user failed', {
             extensions: {
               code: 'BAD_USER_INPUT',
               invalidArgs: args.name,
@@ -128,6 +126,8 @@ const resolvers = {
           })
         );
       }
+
+      return person
     },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name });
@@ -135,14 +135,16 @@ const resolvers = {
       try {
         await person.save();
       } catch (error) {
-        throw new GraphQLError('Saving number failed', {
+        throw new GraphQLError('Editing number failed', {
           extensions: {
             code: 'BAD_USER_INPUT',
-            invalidArgs: args.phone,
-          },
-        });
+            invalidArgs: args.name,
+            error
+          }
+        })
       }
-    },
+
+      return person
   },
 };
 

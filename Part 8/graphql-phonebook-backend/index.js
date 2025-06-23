@@ -11,12 +11,12 @@ require('dotenv').config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-console.log('connecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI);
 
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    console.log('connected to MongoDB')
+    console.log('connected to MongoDB');
   })
   .catch((err) => {
     console.log('error connection to MongoDB:', err.message);
@@ -118,16 +118,15 @@ const resolvers = {
         await person.save();
       } catch (error) {
         throw new GraphQLError('Saving user failed', {
-            extensions: {
-              code: 'BAD_USER_INPUT',
-              invalidArgs: args.name,
-              error,
-            },
-          })
-        );
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        });
       }
 
-      return person
+      return person;
     },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name });
@@ -139,12 +138,13 @@ const resolvers = {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.name,
-            error
-          }
-        })
+            error,
+          },
+        });
       }
 
-      return person
+      return person;
+    },
   },
 };
 

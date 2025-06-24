@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const Person = require('./models/person');
 const User = require('./models/user');
+const user = require('./models/user');
 require('dotenv').config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -135,11 +136,22 @@ const resolvers = {
     },
   },
   Mutation: {
-    addPerson: async (root, args) => {
+    addPerson: async (root, args, context) => {
       const person = new Person({ ...args });
+      const currentUser = context.currentUser;
+
+      if (!currentUser) {
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          },
+        });
+      }
 
       try {
         await person.save();
+        currentUser.friends = currentUser.friends.concat(person);
+        await currentUser.save();
       } catch (error) {
         throw new GraphQLError('Saving user failed', {
           extensions: {

@@ -119,7 +119,7 @@ const typeDefs = `
 const resolvers = {
   Query: {
     personCount: async () => Person.collection.countDocuments(),
-    allPersons: async (root, args) => {
+    allPersons: async (root, args, context) => {
       if (!args.phone) {
         return Person.find({});
       }
@@ -127,6 +127,9 @@ const resolvers = {
       return Person.find({ phone: { $exists: args.phone === 'YES' } });
     },
     findPerson: async (root, args) => Person.findOne({ name: args.name }),
+    me: (root, args, context) => {
+      return context.currentUser;
+    },
   },
   Person: {
     address: ({ street, city }) => {

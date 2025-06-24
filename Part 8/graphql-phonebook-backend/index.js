@@ -8,6 +8,7 @@ mongoose.set('strictQuery', false);
 const Person = require('./models/person');
 const User = require('./models/user');
 const user = require('./models/user');
+const person = require('./models/person');
 require('dotenv').config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -211,6 +212,28 @@ const resolvers = {
       };
 
       return { value: jwt.sign(userForToken, process.env.JWT_SECRET) };
+    },
+    addAsFriend: async (root, args, { currentUser }) => {
+      const isFriend = (person) => {
+        currentUser.friends
+          .map((f) => f._id.toString())
+          .includes(person._id.toString());
+      };
+
+      if (!currentUser) {
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' },
+        });
+      }
+
+      const person = await Person.findOne({ name: args.name });
+      if (!isFriend(person)) {
+        currentUser.friends = currentUser.friends.concat(person);
+      }
+
+      await currentUser.save();
+
+      return currentUser;
     },
   },
 };

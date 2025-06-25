@@ -7,6 +7,7 @@ import Persons from './components/Persons';
 import PersonForm from './components/PersonForm';
 import Notify from './components/Notify';
 import PhoneForm from './components/PhoneForm';
+import LoginForm from './components/LoginForm';
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null);

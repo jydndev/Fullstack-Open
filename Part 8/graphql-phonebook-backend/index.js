@@ -65,7 +65,26 @@ const start = async () => {
 
   await server.start();
 
-  app.use('/', cors(), express.json(), expressMiddleware(server, {}));
+  app.use(
+    '/',
+    cors(),
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const auth = req ? req.headers.authorization : null;
+        if (auth && auth.startsWith('Bearer ')) {
+          const decodedToken = jwt.verify(
+            auth.substring(7),
+            process.env.JWT_SECRET
+          );
+          const currentUser = await User.findById(decodedToken.id).populate(
+            'friends'
+          );
+          return { currentUser };
+        }
+      },
+    })
+  );
 
   const PORT = 4000;
 

@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { LOGIN } from '../queries';
 
 const LoginForm = ({ setError, setToken }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('mluukkai');
+  const [password, setPassword] = useState('secret');
 
   const [login, result] = useMutation(LOGIN, {
     onError: (error) => {
@@ -36,14 +36,13 @@ const LoginForm = ({ setError, setToken }) => {
           />
         </div>
         <div>
-          password
+          password{' '}
           <input
             type="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-
         <button type="submit">login</button>
       </form>
     </div>

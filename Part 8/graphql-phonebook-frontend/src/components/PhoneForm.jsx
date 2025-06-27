@@ -28,16 +28,17 @@ const PhoneForm = ({ setError }) => {
   return (
     <div>
       <h2>change number</h2>
+
       <form onSubmit={submit}>
         <div>
-          name
+          name{' '}
           <input
             value={name}
             onChange={({ target }) => setName(target.value)}
           />
         </div>
         <div>
-          phone
+          phone{' '}
           <input
             value={phone}
             onChange={({ target }) => setPhone(target.value)}

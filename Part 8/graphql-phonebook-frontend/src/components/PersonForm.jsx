@@ -9,7 +9,6 @@ const PersonForm = ({ setError }) => {
   const [city, setCity] = useState('');
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    // refetchQueries: [{ query: ALL_PERSONS }],
     onError: (error) => {
       const messages = error.graphQLErrors.map((e) => e.message).join('\n');
       setError(messages);
@@ -36,7 +35,6 @@ const PersonForm = ({ setError }) => {
 
     setName('');
     setPhone('');
-    2;
     setStreet('');
     setCity('');
   };
@@ -46,34 +44,34 @@ const PersonForm = ({ setError }) => {
       <h2>create new</h2>
       <form onSubmit={submit}>
         <div>
-          name
+          name{' '}
           <input
             value={name}
             onChange={({ target }) => setName(target.value)}
           />
         </div>
         <div>
-          phone
+          phone{' '}
           <input
             value={phone}
             onChange={({ target }) => setPhone(target.value)}
           />
         </div>
         <div>
-          street
+          street{' '}
           <input
             value={street}
             onChange={({ target }) => setStreet(target.value)}
           />
         </div>
         <div>
-          city
+          city{' '}
           <input
             value={city}
             onChange={({ target }) => setCity(target.value)}
           />
         </div>
-        <button type="submit">add</button>
+        <button type="submit">add!</button>
       </form>
     </div>
   );

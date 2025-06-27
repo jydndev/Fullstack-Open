@@ -1,10 +1,10 @@
 const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
-const Person = require('./models/person');
-const User = require('./models/user');
-
 const { PubSub } = require('graphql-subscriptions');
 const pubsub = new PubSub();
+
+const Person = require('./models/person');
+const User = require('./models/user');
 
 const resolvers = {
   Query: {

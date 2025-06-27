@@ -44,9 +44,10 @@ const App = () => {
   return (
     <div>
       <Notify errorMessage={errorMessage} />
+      <PersonForm setError={notify} />
       <button onClick={logout}>logout</button>
       <Persons persons={result.data.allPersons} />
-      <PersonForm setError={notify} />
+
       <PhoneForm setError={notify} />
     </div>
   );

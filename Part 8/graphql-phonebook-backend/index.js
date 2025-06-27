@@ -1,5 +1,4 @@
 const { ApolloServer } = require('@apollo/server');
-// const { startStandaloneServer } = require('@apollo/server/standalone');
 const { expressMiddleware } = require('@apollo/server/express4');
 const {
   ApolloServerPluginDrainHttpServer,
@@ -18,6 +17,7 @@ const User = require('./models/user');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 
+// mongodb
 mongoose.set('strictQuery', false);
 require('dotenv').config();
 
@@ -34,49 +34,26 @@ mongoose
     console.log('error connection to MongoDB:', error.message);
   });
 
-// let persons = [
-//   {
-//     name: 'Arto Hellas',
-//     phone: '040-123543',
-//     street: 'Tapiolankatu 5 A',
-//     city: 'Espoo',
-//     id: '3d594650-3436-11e9-bc57-8b80ba54c431',
+// startStandaloneServer(server, {
+//   listen: { port: 4000 },
+//   context: async ({ req, res }) => {
+//     const auth = req ? req.headers.authorization : null;
+//     if (auth && auth.startsWith('Bearer ')) {
+//       const decodedToken = jwt.verify(
+//         auth.substring(7),
+//         process.env.JWT_SECRET
+//       );
+//       const currentUser = await User.findById(decodedToken.id).populate(
+//         'friends'
+//       );
+//       return { currentUser };
+//     }
 //   },
-//   {
-//     name: 'Matti Luukkainen',
-//     phone: '040-432342',
-//     street: 'Malminkaari 10 A',
-//     city: 'Helsinki',
-//     id: '3d599470-3436-11e9-bc57-8b80ba54c431',
-//   },
-//   {
-//     name: 'Venla Ruuska',
-//     street: 'Nallemäentie 22 C',
-//     city: 'Helsinki',
-//     id: '3d599471-3436-11e9-bc57-8b80ba54c431',
-//   },
-// ];
+// }).then(({ url }) => {
+//   console.log(`Server ready at ${url}`);
+// });
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+// graphql server starts before express
+const start = async () => {};
 
-startStandaloneServer(server, {
-  listen: { port: 4000 },
-  context: async ({ req, res }) => {
-    const auth = req ? req.headers.authorization : null;
-    if (auth && auth.startsWith('Bearer ')) {
-      const decodedToken = jwt.verify(
-        auth.substring(7),
-        process.env.JWT_SECRET
-      );
-      const currentUser = await User.findById(decodedToken.id).populate(
-        'friends'
-      );
-      return { currentUser };
-    }
-  },
-}).then(({ url }) => {
-  console.log(`Server ready at ${url}`);
-});
+start();

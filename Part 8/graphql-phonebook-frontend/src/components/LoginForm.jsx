@@ -29,7 +29,7 @@ const LoginForm = ({ setError, setToken }) => {
     <div>
       <form onSubmit={submit}>
         <div>
-          username
+          username{' '}
           <input
             value={username}
             onChange={({ target }) => setUsername(target.value)}

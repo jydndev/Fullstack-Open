@@ -5,6 +5,9 @@ const {
 } = require('@apollo/server/plugin/drainHttpServer');
 const { makeExecutableSchema } = require('@graphql-tools/schema');
 
+const { WebSocketServer } = require('ws');
+const { useServer } = require('graphql-ws/lib/use/ws');
+
 const http = require('http');
 
 const bodyParser = require('body-parser');
@@ -42,6 +45,11 @@ mongoose
 const start = async () => {
   const app = express();
   const httpServer = http.createServer(app);
+
+  const wsSever = WebSocketServer({
+    server: httpServer,
+    path: '/',
+  });
 
   const server = new ApolloServer({
     schema: makeExecutableSchema({ typeDefs, resolvers }),

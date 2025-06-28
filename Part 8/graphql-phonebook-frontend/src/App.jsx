@@ -1,5 +1,5 @@
-import { useApolloClient, useQuery } from '@apollo/client';
-import { ALL_PERSONS } from './queries';
+import { useApolloClient, useQuery, useSubscription } from '@apollo/client';
+import { ALL_PERSONS, PERSON_ADDED } from './queries';
 
 import { useState } from 'react';
 
@@ -14,6 +14,12 @@ const App = () => {
   const result = useQuery(ALL_PERSONS);
   const [token, setToken] = useState(null);
   const client = useApolloClient();
+
+  useSubscription(PERSON_ADDED, {
+    onData: ({ data }) => {
+      console.log(data);
+    },
+  });
 
   if (result.loading) {
     return <div>loading...</div>;

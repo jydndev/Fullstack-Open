@@ -9,6 +9,23 @@ import Notify from './components/Notify';
 import PhoneForm from './components/PhoneForm';
 import LoginForm from './components/LoginForm';
 
+export const updateCache = (cache, query, addedPerson) => {
+  // helper to eliminate saving same person twice
+  const uniqByName = (a) => {
+    let seen = new Set();
+    return a.filter((item) => {
+      let k = item.name;
+      return seen.has(k) ? false : seen.add(k);
+    });
+  };
+
+  cache.updateQuery(query, ({ allPersons }) => {
+    return {
+      allPersons: uniqByName(allPersons.concat(addedPerson)),
+    };
+  });
+};
+
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const result = useQuery(ALL_PERSONS);

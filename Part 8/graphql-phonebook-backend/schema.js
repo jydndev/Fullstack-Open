@@ -11,7 +11,7 @@ const typeDefs = `
 
   type Address {
     street: String!
-    city: String! 
+    city: String!
   }
 
   type Person {
@@ -25,7 +25,7 @@ const typeDefs = `
     YES
     NO
   }
-  
+
   type Query {
     personCount: Int!
     allPersons(phone: YesNo): [Person!]!
@@ -44,6 +44,10 @@ const typeDefs = `
     createUser(username: String!): User
     login(username: String!, password: String!): Token
     addAsFriend(name: String!): User
+  }
+
+  type Subscription {
+    personAdded: Person!
   }
 `;
 module.exports = typeDefs;

@@ -46,7 +46,7 @@ const start = async () => {
   const app = express();
   const httpServer = http.createServer(app);
 
-  const wsSever = WebSocketServer({
+  const wsServer = new WebSocketServer({
     server: httpServer,
     path: '/',
   });

@@ -133,7 +133,7 @@ const resolvers = {
   },
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncInterator('PERSON_ADDED'),
+      subscribe: () => pubsub.asyncIterator('PERSON_ADDED'),
     },
   },
 };

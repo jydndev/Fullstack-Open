@@ -16,8 +16,9 @@ const App = () => {
   const client = useApolloClient();
 
   useSubscription(PERSON_ADDED, {
-    onData: ({ data }) => {
-      console.log(data);
+    onData: ({ data, client }) => {
+      const addedPerson = data.data.personAdded;
+      notify(`${addedPerson.name} added`);
     },
   });
 

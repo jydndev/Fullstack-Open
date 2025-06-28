@@ -36,12 +36,7 @@ const App = () => {
     onData: ({ data, client }) => {
       const addedPerson = data.data.personAdded;
       notify(`${addedPerson.name} added`);
-
-      client.cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
-        return {
-          allPersons: allPersons.concat(addedPerson),
-        };
-      });
+      updateCache(client.cache, { query: ALL_PERSONS }, addedPerson);
     },
   });
 

@@ -18,7 +18,12 @@ const schema = mongoose.Schema({
   city: {
     type: String,
     required: true,
-    minlength: 3,
+    minlength: 5,
+  },
+  friendOf: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
   },
   ],
 });

@@ -25,7 +25,7 @@ const resolvers = {
     address: (root) => {
       return {
         street: root.street,
-        city: root.        city,
+        city: root.city,
       };
 },
     friendOf: async (root) => {

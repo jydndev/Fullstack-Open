@@ -20,6 +20,7 @@ const schema = mongoose.Schema({
     required: true,
     minlength: 3,
   },
+  ],
 });
 
 module.exports = mongoose.model('Person', schema);

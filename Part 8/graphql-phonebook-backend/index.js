@@ -41,7 +41,7 @@ mongoose
     console.log('error connection to MongoDB:', error.message);
   });
 
-mongoose.set('debug, true');
+// mongoose.set('debug, true');
 
 // graphql server starts before express
 const start = async () => {

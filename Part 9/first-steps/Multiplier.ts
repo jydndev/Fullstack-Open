@@ -9,7 +9,7 @@ const calculator = (a: number, b: number, op: Operation): number => {
     case 'add':
       return a + b;
     case 'divide':
-      if (b === 0) return `can't divide by 0`;
+      if (b === 0) throw new Error(`can't divide by 0`);
       return a / b;
     default:
       throw new Error('Operation is not multiply, add, or divide');

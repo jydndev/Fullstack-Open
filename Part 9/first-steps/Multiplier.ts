@@ -1,3 +1,8 @@
+interface MultiplyValues {
+  value1: number;
+  value2: number;
+}
+
 const multiplicator = (a: number, b: number, printText: string) => {
   console.log(printText, a * b);
 };

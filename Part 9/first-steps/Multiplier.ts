@@ -17,4 +17,11 @@ const calculator = (a: number, b: number, op: Operation): number => {
 };
 
 try {
-} catch (error: unkonwn) {}
+  console.log(calculator(1, 5, 'divide'));
+} catch (error: unkonwn) {
+  let errorMessage = 'something went wrong';
+  if (error instanceof Error) {
+    errorMessage += error.message;
+  }
+  console.log(errorMessage);
+}

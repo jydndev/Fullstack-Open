@@ -9,10 +9,15 @@ app.get('/ping', (_req, res) => {
 });
 
 app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const { value1, value2, op } = req.body;
-  const value: any = 123;
 
-  const result = calculator(value1, value2, op);
+  if (!value1 || isNaN(Number(value1))) {
+    return res.status(400).send({ error: '...' });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  const result = calculator(Number(value1), Number(value2), op);
   res.send({ result });
 });
 

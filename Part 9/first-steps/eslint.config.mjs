@@ -1,25 +1,30 @@
-import js from '@eslint/js';
-import tsParser from '@typescript-eslint/parser';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import stylistic from '@stylistic/eslint-plugin';
 
-export default [
-  {
-    files: ['**/*.ts'],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        project: './tsconfig.json',
-        tsconfigRootDir: new URL('.', import.meta.url).pathname,
-      },
-    },
-    plugins: {
-      '@typescript-eslint': tsPlugin,
-    },
-    rules: {
-      ...js.configs.recommended.rules,
-      ...tsPlugin.configs.recommended.rules,
-      ...tsPlugin.configs['recommended-type-checked'].rules,
-      '@typescript-eslint/no-explicit-any': 'error',
+export default tseslint.config({
+  files: ['**/*.ts'],
+  extends: [
+    eslint.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
+  ],
+  languageOptions: {
+    parserOptions: {
+      project: true,
+      tsconfigRootDir: import.meta.dirname,
     },
   },
-];
+  plugins: {
+    '@stylistic': stylistic,
+  },
+  rules: {
+    '@stylistic/semi': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/restrict-plus-operands': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  },
+});

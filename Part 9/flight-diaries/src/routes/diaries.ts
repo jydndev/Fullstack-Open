@@ -7,8 +7,11 @@ router.get('/', (_req, res) => {
   res.send(diaryService.getNonSensitiveEntires());
 });
 
-router.post('/', (_req, res) => {
-  res.send('Saving a diary');
+router.post('/', (req, res) => {
+  const { date, weather, visibility, comment } = req.body;
+  const addedEntry = diaryService.addDiary(date, weather, visibility, comment);
+
+  res.json(addedEntry);
 });
 
 router.get('/:id', (req, res) => {

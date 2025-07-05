@@ -1,10 +1,5 @@
 import diaries from '../../data/entries';
-import {
-  NewDiaryEntry,
-  NonSensitiveDiaryEntry,
-  Visibility,
-  Weather,
-} from '../types';
+import { NewDiaryEntry, NonSensitiveDiaryEntry } from '../types';
 
 import { DiaryEntry } from '../types';
 

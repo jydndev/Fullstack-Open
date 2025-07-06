@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import diaryService from '../services/diaryService';
-import toNewDiaryEntry from '../utils';
+import toNewDiaryEntry from '../utils/utils';
 
 router.get('/', (_req, res) => {
   res.send(diaryService.getNonSensitiveEntires());

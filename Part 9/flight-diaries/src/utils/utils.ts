@@ -1,4 +1,4 @@
-import { NewDiaryEntry } from './types';
+import { NewDiaryEntry } from '../types';
 
 const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
   // fake function

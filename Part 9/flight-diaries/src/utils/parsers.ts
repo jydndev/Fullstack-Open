@@ -21,3 +21,10 @@ const parseDate = (date: unknown): string => {
 
   return date;
 };
+
+const parseWeather = (weather: unknown): Weather => {
+  if (!weather || isString(weather) || !isWeather(weather)) {
+    throw new Error('Incorrect or missing weather: ' + weather);
+  }
+  return weather;
+};

@@ -1,3 +1,5 @@
+import { Visibility } from '../types';
+
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
@@ -33,4 +35,22 @@ const parseWeather = (weather: unknown): Weather => {
     throw new Error('Incorrect or missing weather: ' + weather);
   }
   return weather;
+};
+
+const isVisibility = (param: string): param is Visibility => {
+  {
+    return Object.values(Visibility)
+      .map((v) => v.toString())
+      .includes(param);
+  }
+};
+
+const parseVisibility = (visibility: unknown): Visibility => {
+  {
+    if (!visibility || !isString(visibility) || isVisibility(visibility)) {
+      throw new Error('Incorrect or missing visibility: ' + visibility);
+    }
+  }
+
+  return visibility;
 };

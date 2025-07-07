@@ -1,15 +1,12 @@
 import { NewDiaryEntry, Visibility, Weather } from './types';
+import z from 'zod';
 
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
 
 const parseComment = (comment: unknown): string => {
-  if (!isString(comment)) {
-    throw new Error('Incorrect comment');
-  }
-
-  return comment;
+  return z.string().parse(comment);
 };
 
 const isDate = (date: string): boolean => {

@@ -7,18 +7,8 @@ import { NewEntrySchema } from '../utils';
 import { z } from 'zod';
 import { DiaryEntry, NewDiaryEntry } from '../types';
 
-router.post('/', (req, res) => {
-  try {
-    const newDiaryEntry = NewEntrySchema.parse(req.body);
-    const addedEntry = diaryService.addDiary(newDiaryEntry);
-    res.json(addedEntry);
-  } catch (error: unknown) {
-    if (error instanceof z.ZodError) {
-      res.status(400).send({ error: error.issues });
-    } else {
-      res.status(400).send({ error: 'unknown error' });
-    }
-  }
+router.get('/', (_req, res: Response<DiaryEntry[]>) => {
+  res.send(diaryService.getNonSensitiveEntries());
 });
 
 router.get('/:id', (req, res) => {

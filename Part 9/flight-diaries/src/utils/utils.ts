@@ -1,8 +1,16 @@
 import { NewDiaryEntry } from '../types';
 
 const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
-  // fake function
-  console.log(object);
+  if (!object || typeof object !== 'object') {
+    throw new Error('Incorrect or missing data');
+  }
+
+  if (
+    'comment' in object &&
+    'date' in object &&
+    'weather' in object &&
+    'visibility' in object
+  ) {
   const newEntry: NewDiaryEntry = {
     weather: 'cloudy', // fake the return value
     visibility: 'great',

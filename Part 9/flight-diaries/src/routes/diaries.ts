@@ -1,11 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express';
-const router = express.Router();
-
 import diaryService from '../services/diaryService';
 import { NewEntrySchema } from '../utils';
 
 import { z } from 'zod';
-import { DiaryEntry, NewDiaryEntry } from '../types';
+import { NewDiaryEntry, DiaryEntry } from '../types';
+
+const router = express.Router();
 
 router.get('/', (_req, res: Response<DiaryEntry[]>) => {
   res.send(diaryService.getNonSensitiveEntries());

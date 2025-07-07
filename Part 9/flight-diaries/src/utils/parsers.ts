@@ -54,3 +54,10 @@ const parseVisibility = (visibility: unknown): Visibility => {
 
   return visibility;
 };
+
+export default {
+  parseWeather,
+  parseVisibility,
+  parseDate,
+  parseComment,
+};

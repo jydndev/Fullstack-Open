@@ -1,11 +1,11 @@
 import { createRoot } from 'react-dom/client';
-import type { JSX } from 'react';
 
 interface WelcomeProps {
   name: string;
 }
 
-const Welcome = (props: WelcomeProps): JSX.Element => {
+// eslint-disable-next-line react-refresh/only-export-components
+const Welcome = (props: WelcomeProps) => {
   return <h2>welcome {props.name}</h2>;
 };
 

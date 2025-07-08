@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 function App() {
-  const [count, setCount] = useState(0)
+  const courseParts = [
+    {
+      name: 'Fundamentals',
+      exerciseCount: 10,
+      description: 'This is an awesome course part',
+    },
+    {
+      name: 'Using props to pass data',
+      exerciseCount: 7,
+      groupProjectCount: 3,
+    },
+    {
+      name: 'Basics of type Narrowing',
+      exerciseCount: 7,
+      description: 'How to go from unknown to string',
+    },
+    {
+      name: 'Deeper type usage',
+      exerciseCount: 14,
+      description: 'Confusing description',
+      backgroundMaterial:
+        'https://type-level-typescript.com/template-literal-types',
+    },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Course Parts</h1>
+      {courseParts.map((part, index) => (
+        <div key={index} style={{ marginBottom: '1em' }}>
+          <h2>{part.name}</h2>
+          <p>Exercises: {part.exerciseCount}</p>
+          {'description' in part && <p>{part.description}</p>}
+          {'groupProjectCount' in part && (
+            <p>Group Projects: {part.groupProjectCount}</p>
+          )}
+          {'backgroundMaterial' in part && (
+            <p>
+              Background:{' '}
+              <a href={part.backgroundMaterial}>{part.backgroundMaterial}</a>
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import App from './App';
 
 interface WelcomeProps {
   name: string;
@@ -9,4 +10,9 @@ const Welcome = (props: WelcomeProps) => {
   return <h2>welcome {props.name}</h2>;
 };
 
-createRoot(document.getElementById('root')!).render(<Welcome name="Sarah" />);
+createRoot(document.getElementById('root')!).render(
+  <>
+    <Welcome name="Sarah" />
+    <App />
+  </>
+);

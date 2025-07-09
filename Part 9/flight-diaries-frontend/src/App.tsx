@@ -52,6 +52,22 @@ function App() {
     },
   ];
 
+  courseParts.forEach((part) => {
+    switch (part.kind) {
+      case 'basic':
+        console.log(part.name);
+        break;
+      case 'group':
+        console.log(part.name);
+        break;
+      case 'background':
+        console.log(part.name);
+        break;
+      default:
+        break;
+    }
+  });
+
   return (
     <div>
       <h1>Course Parts</h1>

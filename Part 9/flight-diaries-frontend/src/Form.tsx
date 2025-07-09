@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface Note {
   id: string;
@@ -18,6 +19,12 @@ function Form() {
     setNotes(notes.concat(noteToAdd));
     setNewNote('');
   };
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/notes').then((response) => {
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <div>

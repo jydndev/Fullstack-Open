@@ -1,10 +1,6 @@
+import { Note, NewNote } from './types';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-interface Note {
-  id: string;
-  content: string;
-}
 
 function Form() {
   const [notes, setNotes] = useState<Note[]>([]);

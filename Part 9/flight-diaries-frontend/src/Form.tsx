@@ -21,8 +21,8 @@ function Form() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3001/notes').then((response) => {
-      console.log(response.data);
+    axios.get<Note[]>('http://localhost:3001/notes').then((response) => {
+      setNotes(response.data);
     });
   }, []);
 

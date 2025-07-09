@@ -1,31 +1,24 @@
-import { Note, NewNote } from './types';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import type { Note } from './types';
+import { getAllNotes, createNote } from './noteService';
 
 function Form() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNote, setNewNote] = useState('');
 
-  const noteCreation = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    axios
-      .post<Note>('http://localhost:3001/notes', { content: newNote })
-      .then((response) => {
-        setNotes(notes.concat(response.data));
-      });
-    // const noteToAdd = {
-    //   content: newNote,
-    //   id: String(notes.length + 1),
-    // };
-    // setNotes(notes.concat(noteToAdd));
-    setNewNote('');
-  };
-
   useEffect(() => {
-    axios.get<Note[]>('http://localhost:3001/notes').then((response) => {
-      setNotes(response.data);
+    getAllNotes().then((data) => {
+      setNotes(data);
     });
   }, []);
+
+  const noteCreation = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    createNote({ content: newNote }).then((data) => {
+      setNotes(notes.concat(data));
+    });
+    setNewNote('');
+  };
 
   return (
     <div>

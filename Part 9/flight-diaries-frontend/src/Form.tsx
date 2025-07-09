@@ -12,11 +12,16 @@ function Form() {
 
   const noteCreation = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const noteToAdd = {
-      content: newNote,
-      id: String(notes.length + 1),
-    };
-    setNotes(notes.concat(noteToAdd));
+    axios
+      .post<Note>('http://localhost:3001/notes', { content: newNote })
+      .then((response) => {
+        setNotes(notes.concat(response.data));
+      });
+    // const noteToAdd = {
+    //   content: newNote,
+    //   id: String(notes.length + 1),
+    // };
+    // setNotes(notes.concat(noteToAdd));
     setNewNote('');
   };
 

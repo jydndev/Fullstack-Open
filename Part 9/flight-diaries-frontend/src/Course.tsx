@@ -70,7 +70,7 @@ function Course() {
 
   return (
     <div>
-      <h1>Course Parts</h1>
+      <h1>{courseName}</h1>
       {courseParts.map((part, index) => (
         <div key={index} style={{ marginBottom: '1em' }}>
           <h2>{part.name}</h2>
